@@ -194,6 +194,32 @@ curl -i \
 5. `scenarios/05-unexpected-exception.md`
 6. `scenarios/06-memory-pressure.md`
 
+### シナリオをテスト結果として出力する
+
+手動の curl に加え、**期待 HTTP ステータス**を自動判定してレポートを書き出せます（アプリ起動＋Postgres 必須）。
+
+```bash
+# Terminal A
+SPRING_PROFILES_ACTIVE=lab mvn spring-boot:run
+
+# Terminal B（任意: DB を空にしてから実行）
+RESET_DB=true bash scripts/run-scenarios.sh
+# または
+make scenarios
+```
+
+生成ファイル（`target/`）:
+
+| ファイル | 用途 |
+|----------|------|
+| `lab-scenario-results.md` | 人が読む表（PASS/FAIL） |
+| `lab-scenario-results.json` | ツール連携・保存用 |
+| `lab-scenario-results.xml` | CI（JUnit 形式） |
+
+環境変数: `BASE_URL`（既定 `http://localhost:8080`）、`REPORT_DIR`、`RESET_DB=true` で `orders` を TRUNCATE。
+
+**ユニットテスト**（`mvn test`）は H2 のコンテキスト起動のみ。**シナリオ 03〜05** は `/lab` と PostgreSQL が必要なため、上記スクリプトまたは手動 curl で確認します。シナリオ 06（JVM heap）は [`scenarios/06-memory-pressure.md`](scenarios/06-memory-pressure.md) どおり手動実行です。
+
 ## 8. Actuator
 
 Health。
