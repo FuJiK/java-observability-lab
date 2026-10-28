@@ -68,6 +68,41 @@ docker compose version
 
 Java 21 を想定しています。
 
+### macOS（Cursor IDE）
+
+Homebrew と [Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/) がある前提です。
+
+```bash
+brew install openjdk@21 maven
+```
+
+シェルで Java 21 を使う（Apple Silicon / Intel 共通の例）:
+
+```bash
+export JAVA_HOME="$(/usr/libexec/java_home -v 21 2>/dev/null || echo "$(brew --prefix openjdk@21)/libexec/openjdk.jdk/Contents/Home")"
+export PATH="$JAVA_HOME/bin:$PATH"
+```
+
+初回セットアップとテスト:
+
+```bash
+chmod +x scripts/verify-mac.sh
+./scripts/verify-mac.sh
+```
+
+**Cursor から起動する**
+
+1. タスク **「lab: docker postgres up」**（Command Palette → Tasks: Run Task）
+2. **Run and Debug** → **Observability Lab (lab profile)** を実行  
+   （定義: [`.vscode/launch.json`](.vscode/launch.json)）
+3. 別ターミナルで `bash scripts/smoke-test.sh` または [シナリオ](scenarios/) の curl
+
+一発起動（ターミナルのみ）:
+
+```bash
+bash scripts/run-local.sh
+```
+
 ## 2. PostgreSQL 起動
 
 ```bash

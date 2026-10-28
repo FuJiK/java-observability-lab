@@ -1,6 +1,9 @@
 target/
 .idea/
-.vscode/
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/extensions.json
 *.iml
 .DS_Store
 *.log

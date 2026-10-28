@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "lab: docker postgres up",
+      "type": "shell",
+      "command": "docker compose up -d postgres",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "lab: mvn spring-boot:run (lab profile)",
+      "type": "shell",
+      "command": "SPRING_PROFILES_ACTIVE=lab mvn spring-boot:run",
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "lab: smoke test",
+      "type": "shell",
+      "command": "bash scripts/smoke-test.sh",
+      "problemMatcher": [],
+      "dependsOn": ["lab: docker postgres up"]
+    }
+  ]
+}

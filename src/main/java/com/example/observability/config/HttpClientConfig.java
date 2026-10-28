@@ -11,12 +11,12 @@ import java.time.Duration;
 public class HttpClientConfig {
 
     @Bean
-    public RestClient restClient(RestClient.Builder builder) {
+    public RestClient restClient() {
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         requestFactory.setConnectTimeout(Duration.ofSeconds(1));
         requestFactory.setReadTimeout(Duration.ofSeconds(2));
 
-        return builder
+        return RestClient.builder()
                 .requestFactory(requestFactory)
                 .build();
     }
