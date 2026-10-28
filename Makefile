@@ -1,4 +1,4 @@
-.PHONY: db-up db-down run test clean
+.PHONY: db-up db-down run test clean scenarios
 
 db-up:
 	docker compose up -d postgres
@@ -14,3 +14,6 @@ test:
 
 clean:
 	mvn clean
+
+scenarios:
+	bash scripts/run-scenarios.sh
