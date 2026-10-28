@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Observability Lab (lab profile)",
+      "request": "launch",
+      "mainClass": "com.example.observability.ObservabilityLabApplication",
+      "projectName": "java-observability-lab",
+      "env": {
+        "SPRING_PROFILES_ACTIVE": "lab"
+      }
+    },
+    {
+      "type": "java",
+      "name": "Observability Lab (lab, 128MB heap — scenario 06)",
+      "request": "launch",
+      "mainClass": "com.example.observability.ObservabilityLabApplication",
+      "projectName": "java-observability-lab",
+      "env": {
+        "SPRING_PROFILES_ACTIVE": "lab"
+      },
+      "vmArgs": "-Xms128m -Xmx128m"
+    }
+  ]
+}
